@@ -13,7 +13,12 @@ import {
   FiPlus 
 } from 'react-icons/fi';
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  activeSection: string;
+  setActiveSection: (section: string) => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) => {
   return (
     <div className="w-64 h-full bg-white dark:bg-zinc-800 text-gray-900 dark:text-zinc-100 flex flex-col border-r border-gray-200 dark:border-zinc-700">
       {/* Logo/Kullanıcı Alanı */}
@@ -45,26 +50,51 @@ const Sidebar: React.FC = () => {
           Menü
         </div>
         <div className="space-y-1">
-          <div className="flex items-center justify-between py-2 px-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300 rounded-lg cursor-pointer">
+          <div
+            className={`flex items-center justify-between py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+              activeSection === 'Chat' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+            }`}
+            onClick={() => setActiveSection('Chat')}
+          >
             <div className="flex items-center">
               <FiMessageSquare className="mr-3" />
               <span>Chat</span>
             </div>
-            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+            {activeSection === 'Chat' && <div className="w-2 h-2 bg-blue-500 rounded-full"></div>}
           </div>
-          <div className="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg cursor-pointer transition-colors">
+          <div
+            className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+              activeSection === 'Klasörler' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+            }`}
+            onClick={() => setActiveSection('Klasörler')}
+          >
             <FiFolder className="mr-3 text-gray-600 dark:text-zinc-300" />
             <span>Klasörler</span>
           </div>
-          <div className="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg cursor-pointer transition-colors">
+          <div
+            className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+              activeSection === 'Dosyalar' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+            }`}
+            onClick={() => setActiveSection('Dosyalar')}
+          >
             <FiFile className="mr-3 text-gray-600 dark:text-zinc-300" />
             <span>Dosyalar</span>
           </div>
-          <div className="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg cursor-pointer transition-colors">
+          <div
+            className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+              activeSection === 'Paylaşılanlar' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+            }`}
+            onClick={() => setActiveSection('Paylaşılanlar')}
+          >
             <FiUsers className="mr-3 text-gray-600 dark:text-zinc-300" />
             <span>Paylaşılanlar</span>
           </div>
-          <div className="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg cursor-pointer transition-colors">
+          <div
+            className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+              activeSection === 'Bulut Depolama' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+            }`}
+            onClick={() => setActiveSection('Bulut Depolama')}
+          >
             <FiCloud className="mr-3 text-gray-600 dark:text-zinc-300" />
             <span>Bulut Depolama</span>
           </div>
@@ -74,15 +104,30 @@ const Sidebar: React.FC = () => {
           Kategoriler
         </div>
         <div className="space-y-1">
-          <div className="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg cursor-pointer transition-colors">
+          <div
+            className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+              activeSection === 'Favoriler' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+            }`}
+            onClick={() => setActiveSection('Favoriler')}
+          >
             <FiStar className="mr-3 text-yellow-500" />
             <span>Favoriler</span>
           </div>
-          <div className="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg cursor-pointer transition-colors">
+          <div
+            className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+              activeSection === 'Son İndirilenler' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+            }`}
+            onClick={() => setActiveSection('Son İndirilenler')}
+          >
             <FiDownload className="mr-3 text-green-500" />
             <span>Son İndirilenler</span>
           </div>
-          <div className="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg cursor-pointer transition-colors">
+          <div
+            className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+              activeSection === 'Çöp Kutusu' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+            }`}
+            onClick={() => setActiveSection('Çöp Kutusu')}
+          >
             <FiTrash2 className="mr-3 text-red-500" />
             <span>Çöp Kutusu</span>
           </div>
@@ -91,7 +136,12 @@ const Sidebar: React.FC = () => {
 
       {/* Alt Kısım - Ayarlar */}
       <div className="p-3 border-t border-gray-200 dark:border-zinc-700">
-        <div className="flex items-center py-2 px-3 hover:bg-gray-100 dark:hover:bg-zinc-700 rounded-lg cursor-pointer transition-colors">
+        <div
+          className={`flex items-center py-2 px-3 rounded-lg cursor-pointer transition-colors ${
+            activeSection === 'Ayarlar' ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-300' : 'hover:bg-gray-100 dark:hover:bg-zinc-700'
+          }`}
+          onClick={() => setActiveSection('Ayarlar')}
+        >
           <FiSettings className="mr-3 text-gray-600 dark:text-zinc-300" />
           <span>Ayarlar</span>
         </div>
